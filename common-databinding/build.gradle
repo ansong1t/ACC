@@ -1,0 +1,42 @@
+import com.appetizercodingchallenge.Libs
+
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
+
+android {
+    compileSdkVersion buildConfig.compileSdk
+
+    defaultConfig {
+        minSdkVersion buildConfig.minSdk
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    implementation project(':base-android')
+    implementation project(':data')
+    implementation project(':common-ui-view')
+
+    api Libs.Insetter.dbx
+
+    implementation Libs.AndroidX.swiperefresh
+    implementation Libs.AndroidX.coreKtx
+
+}

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="SnackbarStyle" parent="Widget.MaterialComponents.Snackbar">
+        <item name="android:backgroundTint">@color/mine_shaft_48</item>
+    </style>
+
+    <style name="ShapeAppearance.Acc.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/corner_size_50</item>
+    </style>
+
+    <style name="ShapeAppearance.Acc.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/corner_size_medium</item>
+    </style>
+
+    <style name="ShapeAppearance.Acc.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/corner_size_large</item>
+    </style>
+
+    <style name="CircleFabButtonSmall" parent="Widget.MaterialComponents.Button">
+        <item name="android:height">@dimen/button_fab_circle_size</item>
+        <item name="android:width">@dimen/button_fab_circle_size</item>
+        <item name="iconPadding">0dp</item>
+        <item name="iconGravity">textStart</item>
+        <item name="backgroundTint">?colorSurface</item>
+        <item name="iconTint">@null</item>
+        <item name="android:insetTop">0dp</item>
+        <item name="android:insetBottom">0dp</item>
+        <item name="android:insetLeft">0dp</item>
+        <item name="android:insetRight">0dp</item>
+        <item name="shapeAppearanceOverlay">@style/ShapeAppearanceOverlay.Acc.CircleFabButton</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Acc.CircleFabButton" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">50%</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.Acc.CardView.Small" parent="">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSize">@dimen/corner_size_small</item>
+    </style>
+</resources>

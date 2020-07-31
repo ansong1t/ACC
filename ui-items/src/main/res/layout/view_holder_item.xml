@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="name"
+            type="String" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="genre"
+            type="String" />
+
+        <variable
+            name="price"
+            type="Double" />
+
+        <variable
+            name="currency"
+            type="String" />
+
+        <variable
+            name="saved"
+            type="Boolean" />
+
+        <variable
+            name="onClickListener"
+            type="android.view.View.OnClickListener" />
+
+        <variable
+            name="onSaveClickListener"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:backgroundTint="@color/white"
+        android:onClick="@{onClickListener}"
+        app:cardElevation="@dimen/elevation_8"
+        app:cardPreventCornerOverlap="false"
+        app:cardUseCompatPadding="false">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingStart="@dimen/margin_8"
+            android:paddingTop="@dimen/margin_8"
+            android:paddingEnd="@dimen/margin_8"
+            android:paddingBottom="@dimen/padding_12">
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cv_image_container"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?colorSurface"
+                app:cardElevation="0dp"
+                app:cardPreventCornerOverlap="false"
+                app:cardUseCompatPadding="false"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.Acc.CardView.Small">
+
+                <ImageView
+                    android:id="@+id/iv_event_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    app:load="@{imageUrl}"
+                    tools:ignore="ContentDescription" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <Space
+                android:id="@+id/space_save"
+                android:layout_width="@dimen/size_8"
+                android:layout_height="@dimen/size_8"
+                app:layout_constraintEnd_toEndOf="@id/cv_image_container"
+                app:layout_constraintTop_toTopOf="@id/cv_image_container" />
+
+            <ImageView
+                android:id="@+id/iv_save_toggle"
+                android:layout_width="@dimen/size_24"
+                android:layout_height="@dimen/size_24"
+                android:background="?selectableItemBackgroundBorderless"
+                android:clickable="true"
+                android:elevation="4dp"
+                android:focusable="true"
+                android:onClick="@{onSaveClickListener}"
+                android:padding="@dimen/padding_4"
+                android:src="@{saved ? @drawable/ic_heart : @drawable/ic_heart_checked}"
+                app:layout_constraintEnd_toStartOf="@id/space_save"
+                app:layout_constraintTop_toBottomOf="@id/space_save"
+                tools:ignore="ContentDescription" />
+
+            <TextView
+                android:id="@+id/tv_item_name"
+                style="?textAppearanceHeadline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_6"
+                android:text="@{name}"
+                android:textColor="?attr/colorPrimary"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="@+id/cv_image_container"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@+id/cv_image_container"
+                app:layout_constraintTop_toBottomOf="@id/cv_image_container"
+                tools:text="Track Name" />
+
+            <TextView
+                android:id="@+id/tv_genre"
+                style="@style/TextAppearance.Acc.Body2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{genre}"
+                android:textColor="?colorPrimaryDark"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintStart_toStartOf="@+id/tv_item_name"
+                app:layout_constraintTop_toBottomOf="@id/tv_item_name" />
+
+            <TextView
+                android:id="@+id/tv_price"
+                style="?textAppearanceSubtitle2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_6"
+                android:textColor="?attr/colorPrimary"
+                app:itemCurrency="@{currency}"
+                app:itemPrice="@{price}"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/cv_image_container"
+                app:layout_constraintHorizontal_bias="1"
+                app:layout_constraintStart_toStartOf="@id/cv_image_container"
+                app:layout_constraintTop_toBottomOf="@id/tv_genre"
+                tools:text="8888 AUD" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

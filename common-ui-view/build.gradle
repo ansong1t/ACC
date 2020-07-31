@@ -1,0 +1,49 @@
+import com.appetizercodingchallenge.Libs
+
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
+
+android {
+    compileSdkVersion buildConfig.compileSdk
+
+    defaultConfig {
+        minSdkVersion buildConfig.minSdk
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+}
+
+dependencies {
+    implementation project(':data-android')
+    implementation project(':base-android')
+    implementation project(':common-ui-resources')
+
+    implementation Libs.Kotlin.stdlib
+    api Libs.AndroidX.Lifecycle.livedata
+    api Libs.AndroidX.Lifecycle.viewmodel
+
+    implementation Libs.Coroutines.core
+
+    api Libs.AndroidX.appcompat
+    implementation Libs.AndroidX.recyclerview
+    implementation Libs.AndroidX.constraintLayout
+    implementation Libs.AndroidX.coreKtx
+    api Libs.AndroidX.Fragment.fragment
+    api Libs.AndroidX.Fragment.fragmentKtx
+    implementation Libs.AndroidX.Navigation.fragment
+
+    api Libs.Google.material
+}

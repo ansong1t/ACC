@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="search_hint_placeholder">Search…</string>
+    <string name="empty_state_placeholder_event_bold">Search your events here</string>
+    <string name="empty_state_placeholder_event">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</string>
+</resources>

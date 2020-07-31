@@ -1,0 +1,63 @@
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+import com.appetizercodingchallenge.Libs
+buildscript {
+
+    ext {
+        kotlin_version = '1.3.72'
+    }
+    ext.buildConfig = [
+            'compileSdk': 30,
+            'minSdk'    : 21,
+            'targetSdk' : 30
+    ]
+
+    repositories {
+        google()
+        jcenter()
+    }
+    dependencies {
+        classpath Libs.androidGradlePlugin
+        classpath Libs.Kotlin.gradlePlugin
+        classpath Libs.AndroidX.Navigation.safeArgs
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+//        classpath Libs.Google.gmsGoogleServices
+//        classpath Libs.Google.crashlyticsGradle
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+plugins {
+    id "io.gitlab.arturbosch.detekt" version "1.9.1"
+}
+
+allprojects {
+    repositories {
+        google()
+        jcenter()
+        maven { url 'https://jitpack.io' }
+
+    }
+    apply from: "$rootDir/detekt.gradle"
+    apply from: "$rootDir/ktlint.gradle"
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}
+
+task installGitHook(type: Copy) {
+    from new File(rootProject.rootDir, 'pre-commit')
+    into { new File(rootProject.rootDir, '.git/hooks') }
+    fileMode 0777
+}
+
+tasks.getByPath(':app:preBuild').dependsOn installGitHook
+
+task preCommitTask(type: GradleBuild) {
+    tasks = ["detekt", "ktlint"]
+}
+
+task checkAllLints(type: GradleBuild, group: "verification") {
+    tasks = ["detekt", "ktlint", "lintDebug", "testDebugUnitTest"]
+}

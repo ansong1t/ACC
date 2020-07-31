@@ -1,0 +1,173 @@
+import com.appetizercodingchallenge.Libs
+
+apply plugin: 'com.android.application'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+apply plugin: 'org.jetbrains.kotlin.android.extensions'
+//apply plugin: 'com.google.gms.google-services'
+//apply plugin: 'com.google.firebase.crashlytics'
+
+android {
+    compileSdkVersion buildConfig.compileSdk
+    defaultConfig {
+        applicationId "com.appetizercodingchallenge"
+        minSdkVersion buildConfig.minSdk
+        targetSdkVersion buildConfig.targetSdk
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [
+                        "room.incremental"   : "true",
+                        "room.schemaLocation":
+                                "$projectDir/schemas".toString()
+                ]
+            }
+        }
+        buildConfigField "String", "BASE_URL", "\"https://itunes.apple.com/\""
+    }
+    buildTypes {
+        debug {
+            debuggable true
+            minifyEnabled false
+            applicationIdSuffix ".debug"
+            versionNameSuffix '-debug'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        release {
+            debuggable false
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    // work-runtime-ktx 2.1.0 and above now requires Java 8
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+    buildFeatures {
+        dataBinding true
+    }
+    buildToolsVersion = '29.0.2'
+    androidExtensions {
+        experimental = true
+    }
+    sourceSets {
+        androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+    }
+
+    sourceSets.each {
+        it.java.srcDirs += "src/$it.name/kotlin"
+    }
+
+    packagingOptions {
+        // Exclude AndroidX version files
+        exclude 'META-INF/*.version'
+        // Exclude consumer proguard files
+        exclude 'META-INF/proguard/*'
+        // Exclude the Firebase/Fabric/other random properties files
+        exclude '/*.properties'
+        exclude 'fabric/*.properties'
+        exclude 'META-INF/*.properties'
+        exclude 'META-INF/metadata.kotlin_module'
+        exclude 'META-INF/metadata.jvm.kotlin_module'
+    }
+}
+
+check.dependsOn ktlint
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation project(':base-android')
+    implementation project(':common-layout')
+    implementation project(':common-ui-view')
+    implementation project(':common-ui-resources')
+    implementation project(':common-navigation')
+    implementation project(':common-databinding')
+    implementation project(':common-image-loading')
+    implementation project(':common-paging')
+    implementation project(':data-android')
+    implementation project(':domain')
+
+    implementation project(':ui-items')
+    implementation project(':ui-search-items')
+    implementation project(':ui-saved-items')
+
+    implementation Libs.AndroidX.appcompat
+
+    implementation Libs.AndroidX.coreKtx
+
+    implementation Libs.AndroidX.Fragment.fragmentKtx
+
+    implementation Libs.AndroidX.Lifecycle.extensions
+    implementation Libs.AndroidX.Lifecycle.livedata
+    implementation Libs.AndroidX.Lifecycle.viewmodel
+
+    implementation Libs.AndroidX.recyclerview
+    implementation Libs.AndroidX.constraintLayout
+    implementation Libs.AndroidX.viewpager
+
+    implementation Libs.AndroidX.Paging.runtime
+    implementation Libs.AndroidX.Paging.common
+
+    implementation Libs.AndroidX.Room.runtime
+    implementation Libs.AndroidX.Room.ktx
+    kapt Libs.AndroidX.Room.compiler
+    androidTestImplementation Libs.AndroidX.Room.testing
+
+    implementation Libs.AndroidX.Work.runtimeKtx
+
+    implementation Libs.Coil.coil
+
+    implementation Libs.AndroidX.Navigation.fragment
+    implementation Libs.AndroidX.Navigation.ui
+
+    implementation Libs.Moshi.kotlin
+    kapt Libs.Moshi.codegen
+
+    implementation Libs.Kotlin.stdlib
+
+    implementation Libs.Coroutines.android
+    implementation Libs.Coroutines.core
+    testImplementation Libs.Coroutines.test
+
+    testImplementation Libs.AndroidX.archCoreTesting
+    testImplementation Libs.AndroidX.Test.core
+
+    testImplementation Libs.mockito
+
+    implementation Libs.Insetter.ktx
+    implementation Libs.Insetter.dbx
+    implementation Libs.Insetter.core
+
+    // Koin Dependency Injection
+    implementation Libs.Koin.android
+    implementation Libs.Koin.viewmodel
+
+    // Retrofit using RxJava2, Okhttp, Okhttp logging interceptor, Gson
+    implementation Libs.Retrofit.retrofit
+    implementation Libs.Retrofit.moshiConverter
+
+    implementation Libs.OkHttp.loggingInterceptor
+
+    implementation Libs.Anko.common
+
+    // Firebase
+//    implementation Libs.Google.firebaseAnalytics
+//    implementation Libs.Google.firebaseMessaging
+//    implementation Libs.Google.crashlytics
+
+    implementation Libs.threeTenAbp
+    debugImplementation Libs.leakCanary
+    debugImplementation Libs.chucker
+
+}

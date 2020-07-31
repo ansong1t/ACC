@@ -1,0 +1,9 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="23.7dp"
+    android:height="21dp"
+    android:viewportWidth="23.7"
+    android:viewportHeight="21">
+    <path
+        android:fillColor="@color/mine_shaft"
+        android:pathData="M23.167,11.865L20.985,11.865v7.83a1.188,1.188 0,0 1,-1.305 1.305h-6.22v-7.83h-3.22v7.83L4.02,21a1.188,1.188 0,0 1,-1.305 -1.305v-7.83L0.529,11.865c-0.781,0 -0.613,-0.422 -0.078,-0.976L10.929,0.407a1.253,1.253 0,0 1,1.848 0l10.47,10.481c0.537,0.555 0.7,0.977 -0.077,0.977Z" />
+</vector>
