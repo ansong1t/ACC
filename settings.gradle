@@ -1,3 +1,4 @@
+include ':ui-tv-show-details'
 include ':ui-item-details'
 include ':ui-items'
 include ':ui-search-items'

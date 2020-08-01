@@ -3,7 +3,7 @@ package com.appetizercodingchallenge.data.resultentities
 import androidx.room.Embedded
 import androidx.room.Ignore
 import androidx.room.Relation
-import com.appetizercodingchallenge.data.entities.Item
+import com.appetizercodingchallenge.data.entities.Song
 import com.appetizercodingchallenge.data.entities.SearchedItemEntry
 import java.util.Objects
 
@@ -13,13 +13,13 @@ data class SearchedItemEntryWithDetails(
 
     @Relation(
         parentColumn = "item_id",
-        entityColumn = "id"
+        entityColumn = "track_id"
     )
-    var item: Item = Item()
+    var song: Song = Song()
 ) {
 
     @Ignore
     fun generateStableId(): Long {
-        return Objects.hash(Item::class.java.name, searchItemEntry.id).toLong()
+        return Objects.hash(Song::class.java.name, searchItemEntry.id).toLong()
     }
 }

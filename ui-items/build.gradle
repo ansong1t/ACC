@@ -37,6 +37,7 @@ dependencies {
     implementation project(':common-ui-resources')
     implementation project(':common-ui-view')
     implementation project(':common-databinding')
+    implementation project(':common-navigation')
     implementation project(':common-image-loading')
     implementation project(':common-epoxy')
     implementation project(':common-paging')

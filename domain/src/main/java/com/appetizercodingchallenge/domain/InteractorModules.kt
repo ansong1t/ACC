@@ -4,6 +4,7 @@ import com.appetizercodingchallenge.domain.interactors.UpdateItems
 import com.appetizercodingchallenge.domain.interactors.UpdateSearchedItems
 import com.appetizercodingchallenge.domain.observers.ObservePagedItems
 import com.appetizercodingchallenge.domain.observers.ObservePagedSearchedItems
+import com.appetizercodingchallenge.domain.observers.ObserveTvShowWithEpisodes
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import org.koin.dsl.module
 
@@ -14,4 +15,5 @@ val interactorModules = module {
 
     factory { ObservePagedSearchedItems(get()) }
     factory { ObservePagedItems(get()) }
+    factory { ObserveTvShowWithEpisodes(get()) }
 }

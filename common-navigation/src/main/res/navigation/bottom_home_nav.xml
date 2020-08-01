@@ -9,4 +9,17 @@
         android:name="com.appetizercodingchallenge.ui.items.ItemsFragment"
         android:label="fragment_items" />
 
+    <fragment
+        android:id="@+id/tvShowDetailsFragment"
+        android:name="com.appetizercodingchallenge.ui.tvshowdetails.TvShowDetailsFragment"
+        android:label="fragment_tv_show_details_fragment">
+
+        <argument
+            android:name="collection_id"
+            app:argType="long" />
+
+        <deepLink
+            app:uri="com.appetizercodingchallenge://tv-show/{collection_id}" />
+    </fragment>
+
 </navigation>

@@ -9,8 +9,8 @@ import androidx.room.PrimaryKey
 @Entity(
     tableName = "searched_item_entries", foreignKeys = [
         ForeignKey(
-            entity = Item::class,
-            parentColumns = arrayOf("id"),
+            entity = Song::class,
+            parentColumns = arrayOf("track_id"),
             childColumns = arrayOf("item_id"),
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.CASCADE

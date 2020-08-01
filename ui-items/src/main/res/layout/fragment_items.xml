@@ -13,6 +13,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:backgroundTint="@color/white"
+            android:visibility="gone"
             app:cardCornerRadius="@dimen/corner_size_small"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -47,12 +48,12 @@
             </com.google.android.material.textfield.TextInputLayout>
         </com.google.android.material.card.MaterialCardView>
         <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/grid_swipe_refresh"
+            android:id="@+id/refresher"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
             <com.airbnb.epoxy.EpoxyRecyclerView
-                android:id="@+id/staggered_recyclerview"
+                android:id="@+id/rv_item_lists"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:clipToPadding="false"

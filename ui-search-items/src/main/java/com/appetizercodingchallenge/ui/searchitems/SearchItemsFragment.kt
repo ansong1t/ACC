@@ -112,9 +112,9 @@ class SearchItemsFragment : FragmentWithBinding<FragmentSearchItemsBinding>() {
             override fun buildItemModel(item: SearchedItemEntryWithDetails): EpoxyModel<*> {
                 return SearchItemBindingModel_()
                     .id(item.generateStableId())
-                    .name(item.item.trackName)
-                    .imageUrl(item.item.artworkUrl100)
-                    .description(String.format("Artist: %s", item.item.artistName))
+                    .name(item.song.trackName)
+                    .imageUrl(item.song.artworkUrl100)
+                    .description(String.format("Artist: %s", item.song.artistName))
                     .onClickListener(View.OnClickListener {
 //                        findNavController().navigate("com.acc://item/${item.item.id}".toUri())
                         requireContext().toast("Item clicked!")

@@ -4,11 +4,13 @@ import android.content.Context
 import android.os.Debug
 import androidx.room.Room
 import com.appetizercodingchallenge.data.daos.ItemDao
+import com.appetizercodingchallenge.data.daos.TvShowDao
 import org.koin.dsl.module
 
 val dbModules = module {
     single { provideDatabase(get()) }
     factory { provideItemDao(get()) }
+    factory { provideTvShowDao(get()) }
 }
 
 @Suppress("SpreadOperator")
@@ -27,3 +29,4 @@ private fun provideDatabase(
 }
 
 private fun provideItemDao(db: AccRoomDatabase): ItemDao = db.itemDao()
+private fun provideTvShowDao(db: AccRoomDatabase): TvShowDao = db.tvShowDao()

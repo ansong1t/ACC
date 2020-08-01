@@ -1,11 +1,12 @@
 package com.appetizercodingchallenge.data.mappers
 
-import com.appetizercodingchallenge.data.entities.Item
+import com.appetizercodingchallenge.data.entities.Song
 import com.appetizercodingchallenge.data.responses.ItemResponse
 
-class SearchItemResponseToItem : Mapper<ItemResponse, Item> {
-    override suspend operator fun invoke(from: ItemResponse): Item =
-        Item(
+class ItemResponseToSongMapper : Mapper<ItemResponse, Song> {
+    override suspend operator fun invoke(from: ItemResponse): Song =
+        Song(
+            id = from.trackId,
             artistId = from.artistId,
             artistName = from.artistName,
             artistViewUrl = from.artistViewUrl,
@@ -23,14 +24,12 @@ class SearchItemResponseToItem : Mapper<ItemResponse, Item> {
             discCount = from.discCount,
             discNumber = from.discNumber,
             isStreamable = from.isStreamable,
-            kind = from.kind,
             previewUrl = from.previewUrl,
             primaryGenreName = from.primaryGenreName,
             releaseDate = from.releaseDate,
             trackCensoredName = from.trackCensoredName,
             trackCount = from.trackCount,
             trackExplicitness = from.trackExplicitness,
-            trackId = from.trackId,
             trackName = from.trackName,
             trackNumber = from.trackNumber,
             trackPrice = from.trackPrice,

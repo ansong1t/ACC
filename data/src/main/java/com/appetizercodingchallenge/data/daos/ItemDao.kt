@@ -6,21 +6,24 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import com.appetizercodingchallenge.data.entities.Item
+import com.appetizercodingchallenge.data.entities.FeatureMovie
+import com.appetizercodingchallenge.data.entities.Song
 import com.appetizercodingchallenge.data.entities.ItemEntry
 import com.appetizercodingchallenge.data.entities.SearchedItemEntry
+import com.appetizercodingchallenge.data.entities.TvEpisode
+import com.appetizercodingchallenge.data.entities.TvShow
+import com.appetizercodingchallenge.data.mappers.ItemResponseToFeatureMovieMapper
+import com.appetizercodingchallenge.data.mappers.ItemResponseToSongMapper
+import com.appetizercodingchallenge.data.mappers.ItemResponseToTvEpisodeMapper
+import com.appetizercodingchallenge.data.mappers.ItemResponseToTvShowMapper
+import com.appetizercodingchallenge.data.responses.ItemResponse
 import com.appetizercodingchallenge.data.resultentities.ItemEntryWithDetails
 import com.appetizercodingchallenge.data.resultentities.SearchedItemEntryWithDetails
-import kotlinx.coroutines.flow.Flow
+import com.appetizercodingchallenge.data.types.ListItemType
+import com.appetizercodingchallenge.data.types.responseToTrackType
 
 @Dao
-abstract class ItemDao : EntityDao<Item>() {
-
-    @Query("SELECT * FROM items WHERE id = :id")
-    abstract fun get(id: Long): Item
-
-    @Query("SELECT * FROM `items` WHERE id = :id")
-    abstract fun getObservableItem(id: Long): Flow<Item?>
+abstract class ItemDao : EntityDao<Song>() {
 
     @Transaction
     @Query("SELECT * FROM item_entries")
@@ -39,20 +42,33 @@ abstract class ItemDao : EntityDao<Item>() {
     @Query("SELECT EXISTS (SELECT 1 FROM item_entries LIMIT 1)")
     abstract suspend fun hasItemEntry(): Boolean
 
-    suspend fun insertSearchedEvents(searchKey: String, items: List<Item>) {
+    suspend fun insertItems(
+        items: List<ItemResponse>,
+        songMapper: ItemResponseToSongMapper,
+        featureMovieMapper: ItemResponseToFeatureMovieMapper,
+        tvEpisodeMapper: ItemResponseToTvEpisodeMapper,
+        tvShowMapper: ItemResponseToTvShowMapper
+    ) {
+        val tvEpisodes = arrayListOf<TvEpisode>()
         items.forEach {
-            val insertedId = insertOrUpdate(it)
-            val entry = SearchedItemEntry(itemId = insertedId, searchKey = searchKey)
-            insertSearchedItemEntry(entry)
-        }
-    }
-
-    suspend fun insertItems(items: List<Item>) {
-        items.forEach {
-            val insertedId = insertWithReplace(it)
-            val entry = ItemEntry(itemId = insertedId, trackId = it.trackId)
+            when (responseToTrackType(it.kind)) {
+                ListItemType.SONG -> insertSong(songMapper(it))
+                ListItemType.FEATURE_MOVIE -> insertFeatureMovie(featureMovieMapper(it))
+                ListItemType.TV_SHOW -> {
+                    insertTvShow(tvShowMapper(it))
+                    tvEpisodes.add(tvEpisodeMapper(it))
+                }
+                else -> {
+                    // TODO save audio book
+                }
+            }
+            val entry = ItemEntry(
+                trackId = if (responseToTrackType(it.kind) != ListItemType.TV_SHOW) it.trackId else it.collectionId,
+                kind = responseToTrackType(it.kind)
+            )
             insertItemEntry(entry)
         }
+        insertTvEpisodes(tvEpisodes)
     }
 
     @Insert(entity = SearchedItemEntry::class, onConflict = OnConflictStrategy.REPLACE)
@@ -60,4 +76,16 @@ abstract class ItemDao : EntityDao<Item>() {
 
     @Insert(entity = ItemEntry::class, onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertItemEntry(entry: ItemEntry)
+
+    @Insert(entity = Song::class, onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertSong(song: Song): Long
+
+    @Insert(entity = FeatureMovie::class, onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertFeatureMovie(featureMovie: FeatureMovie): Long
+
+    @Insert(entity = TvEpisode::class, onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertTvEpisodes(tvEpisodes: List<TvEpisode>)
+
+    @Insert(entity = TvShow::class, onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertTvShow(show: TvShow): Long
 }

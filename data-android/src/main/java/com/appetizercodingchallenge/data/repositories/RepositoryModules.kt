@@ -7,7 +7,11 @@ val repositoryModules = module {
         ItemRepositoryImpl(
             get(),
             get(),
+            get(),
+            get(),
+            get(),
             get()
         )
     }
+    single<TvShowRepository> { TvShowRepositoryImpl(get()) }
 }

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.observe
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.ModelCollector
@@ -17,15 +18,16 @@ import com.appetizercodingchallenge.api.UiError
 import com.appetizercodingchallenge.api.UiLoading
 import com.appetizercodingchallenge.common.FragmentWithBinding
 import com.appetizercodingchallenge.common.layout.headline3
+import com.appetizercodingchallenge.common.navigation.tvShowDeeplink
 import com.appetizercodingchallenge.common.paging.PagingEpoxyController
 import com.appetizercodingchallenge.data.resultentities.ItemEntryWithDetails
+import com.appetizercodingchallenge.data.types.ListItemType
 import com.appetizercodingchallenge.ui.ProgressTimeLatch
 import com.appetizercodingchallenge.ui.SpacingItemDecorator
 import com.appetizercodingchallenge.ui.items.databinding.FragmentItemsBinding
 import com.appetizercodingchallenge.util.autoCleared
 import com.appetizercodingchallenge.util.getLastUserVisitedTime
 import com.appetizercodingchallenge.util.getPref
-import org.jetbrains.anko.toast
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import org.koin.core.qualifier.qualifier
@@ -65,7 +67,7 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
     }
 
     override fun onDestroyView() {
-        binding?.staggeredRecyclerview?.clear()
+        binding?.rvItemLists?.clear()
         super.onDestroyView()
     }
 
@@ -73,12 +75,12 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
         binding: FragmentItemsBinding,
         savedInstanceState: Bundle?
     ) {
-//        binding!!.staggeredRecyclerview.applySystemWindowInsetsToMargin(top = true)
-        swipeRefreshLatch = ProgressTimeLatch(minShowTime = 1350) {
-            binding.gridSwipeRefresh.isRefreshing = it
+//        binding!!.rvItemLists.applySystemWindowInsetsToMargin(top = true)
+        swipeRefreshLatch = ProgressTimeLatch {
+            binding.refresher.isRefreshing = it
         }
 
-        binding.staggeredRecyclerview.apply {
+        binding.rvItemLists.apply {
             // We set the item animator to null since it can interfere with the enter/shared element
             // transitions
             itemAnimator = null
@@ -91,7 +93,7 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
             )
         }
 
-        binding.gridSwipeRefresh.setOnRefreshListener(viewModel::refresh)
+        binding.refresher.setOnRefreshListener(viewModel::refresh)
 
         lifecycleScope.launchWhenStarted {
             viewModel.pagedList.collect {
@@ -145,16 +147,17 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
             override fun buildItemModel(item: ItemEntryWithDetails): EpoxyModel<*> {
                 return ItemBindingModel_()
                     .id(item.generateStableId())
-                    .name(item.item?.trackName)
-                    .imageUrl(item.item?.artworkUrl100)
-                    .genre(item.item?.primaryGenreName)
-                    .price(item.item?.trackPrice)
-                    .currency(item.item?.currency)
+                    .name(item.trackName())
+                    .imageUrl(item.imageUrl())
+                    .genre(item.genre())
+                    .price(item.trackPrice())
+                    .currency(item.currency())
+                    .kind(item.kind())
                     .onClickListener(View.OnClickListener {
-                        requireContext().toast("onClickListener!")
-                    })
-                    .onSaveClickListener(View.OnClickListener {
-                        requireContext().toast("onSaveClick!")
+                        when (item.itemEntry.kind) {
+                            ListItemType.TV_SHOW ->
+                                findNavController().navigate(tvShowDeeplink(item.itemEntry.trackId))
+                        }
                     })
             }
 

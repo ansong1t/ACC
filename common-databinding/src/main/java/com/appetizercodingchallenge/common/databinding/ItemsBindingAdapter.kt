@@ -1,4 +1,4 @@
-package com.appetizercodingchallenge.ui.items
+package com.appetizercodingchallenge.common.databinding
 
 import android.text.SpannableStringBuilder
 import android.widget.TextView
