@@ -20,17 +20,4 @@ data class TvShow(
     @ColumnInfo(name = "disc_number") val discNumber: Int = 0,
     @ColumnInfo(name = "long_description") val longDescription: String = "",
     @ColumnInfo(name = "primary_genre_name") val primaryGenreName: String = ""
-) : AccEntity {
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is TvShow -> id == id
-            else -> false
-        }
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + collectionName.hashCode()
-        return result
-    }
-}
+) : AccEntity

@@ -22,4 +22,17 @@
             app:uri="com.appetizercodingchallenge://tv-show/{collection_id}" />
     </fragment>
 
+    <fragment
+        android:id="@+id/songDetailsFragment"
+        android:name="com.appetizercodingchallenge.ui.songdetails.SongDetailsFragment"
+        android:label="fragment_song_details_fragment">
+
+        <argument
+            android:name="track_id"
+            app:argType="long" />
+
+        <deepLink
+            app:uri="com.appetizercodingchallenge://song/{track_id}" />
+    </fragment>
+
 </navigation>

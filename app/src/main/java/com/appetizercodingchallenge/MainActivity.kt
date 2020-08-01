@@ -1,5 +1,6 @@
 package com.appetizercodingchallenge
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Gravity
 import android.view.View
@@ -13,8 +14,6 @@ import androidx.transition.Transition
 import androidx.transition.TransitionManager
 import com.appetizercodingchallenge.common.navigation.BottomNavigationHelper
 import com.appetizercodingchallenge.databinding.ActivityMainBinding
-import com.appetizercodingchallenge.util.getPref
-import com.appetizercodingchallenge.util.setLastUserVisitedTime
 import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 import dev.chrisbanes.insetter.setEdgeToEdgeSystemUiFlags
 
@@ -30,6 +29,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
         binding!!.mainRoot.setEdgeToEdgeSystemUiFlags(true)
         initHelper()
         if (savedInstanceState == null) setupBottomNavigationBar()
+        startService(Intent(this, PreviousTimeVisitedService::class.java))
     }
 
     private fun initHelper() {
@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity(), NavController.OnDestinationChangedList
     }
 
     override fun onDestroy() {
-        getPref().setLastUserVisitedTime(System.currentTimeMillis())
+        stopService(Intent(this, PreviousTimeVisitedService::class.java))
         super.onDestroy()
         binding = null
     }

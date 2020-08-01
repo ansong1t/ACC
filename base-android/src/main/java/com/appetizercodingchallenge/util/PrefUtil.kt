@@ -14,7 +14,10 @@ fun Context.getPref(): SharedPreferences =
 fun SharedPreferences.getBearerToken(): String? =
     getString(PREF_BEARER_TOKEN, null)
 
-fun SharedPreferences.setLastUserVisitedTime(millis: Long) =
+fun SharedPreferences.recordPreviousVisited() =
+    edit().putLong(PREF_LAST_USER_VISITED, System.currentTimeMillis()).commit()
+
+fun SharedPreferences.setLastUserVisitedTime() =
     edit().putLong(PREF_LAST_USER_VISITED, System.currentTimeMillis()).apply()
 
 fun SharedPreferences.getLastUserVisitedTime(): Date =

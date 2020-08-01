@@ -4,6 +4,7 @@ import android.content.Context
 import com.airbnb.epoxy.EpoxyController
 import com.appetizercodingchallenge.common.layout.headline2
 import com.appetizercodingchallenge.common.layout.infiniteLoading
+import com.appetizercodingchallenge.common.layout.separatorThin
 import com.appetizercodingchallenge.common.layout.vertSpacerSmall
 import com.appetizercodingchallenge.extensions.observable
 
@@ -34,7 +35,8 @@ internal class TvShowDetailsEpoxyController(private var context: Context?) : Epo
             id("title_seasons")
         }
 
-        state.tvShowWithEpisodes.episodes.forEach {
+        state.tvShowWithEpisodes.episodes.forEachIndexed { index, it ->
+
             episodeItem {
                 id("episode_item_${it.id}")
                 counter(it.trackNumber)
@@ -45,6 +47,10 @@ internal class TvShowDetailsEpoxyController(private var context: Context?) : Epo
                 onViewMoreClick { v ->
                     callbacks?.onEpisodeViewMoreClicked(it.trackViewUrl)
                 }
+            }
+
+            separatorThin {
+                id("separator_${it.id}")
             }
         }
 

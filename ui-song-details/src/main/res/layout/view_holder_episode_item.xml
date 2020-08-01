@@ -72,12 +72,12 @@
 
         <TextView
             android:id="@+id/tv_view_more_details"
-            style="?textAppearanceHeadline4"
+            style="?textAppearanceSubtitle2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?selectableItemBackground"
             android:padding="@dimen/padding_4"
-            android:text="@string/more_details"
+            android:text="@string/view_more_details"
             app:layout_constrainedWidth="true"
             android:onClick="@{onViewMoreClick}"
             app:layout_constraintEnd_toEndOf="parent"

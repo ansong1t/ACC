@@ -18,7 +18,8 @@ import com.appetizercodingchallenge.api.UiError
 import com.appetizercodingchallenge.api.UiLoading
 import com.appetizercodingchallenge.common.FragmentWithBinding
 import com.appetizercodingchallenge.common.layout.headline3
-import com.appetizercodingchallenge.common.navigation.tvShowDeeplink
+import com.appetizercodingchallenge.common.navigation.songDetailsDeeplink
+import com.appetizercodingchallenge.common.navigation.tvShowDetailsDeeplink
 import com.appetizercodingchallenge.common.paging.PagingEpoxyController
 import com.appetizercodingchallenge.data.resultentities.ItemEntryWithDetails
 import com.appetizercodingchallenge.data.types.ListItemType
@@ -156,7 +157,9 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
                     .onClickListener(View.OnClickListener {
                         when (item.itemEntry.kind) {
                             ListItemType.TV_SHOW ->
-                                findNavController().navigate(tvShowDeeplink(item.itemEntry.trackId))
+                                findNavController().navigate(tvShowDetailsDeeplink(item.itemEntry.trackId))
+                            ListItemType.SONG ->
+                                findNavController().navigate(songDetailsDeeplink(item.itemEntry.trackId))
                         }
                     })
             }

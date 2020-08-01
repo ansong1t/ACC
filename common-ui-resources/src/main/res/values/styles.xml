@@ -21,6 +21,7 @@
         <item name="textAppearanceHeadline1">@style/TextAppearance.Acc.Headline1</item>
         <item name="textAppearanceHeadline2">@style/TextAppearance.Acc.Headline2</item>
         <item name="textAppearanceHeadline3">@style/TextAppearance.Acc.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.Acc.Headline4</item>
         <item name="textAppearanceSubtitle1">@style/TextAppearance.Acc.Subtitle1</item>
         <item name="textAppearanceSubtitle2">@style/TextAppearance.Acc.Subtitle2</item>
         <item name="textAppearanceBody1">@style/TextAppearance.Acc.Body1</item>

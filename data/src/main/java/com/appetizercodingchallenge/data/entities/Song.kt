@@ -38,17 +38,5 @@ data class Song(
     @ColumnInfo(name = "wrapper_type") val wrapperType: String = ""
 ) : AccEntity {
 
-    override fun equals(other: Any?): Boolean {
-        return when (other) {
-            is Song -> id == id
-            else -> false
-        }
-    }
-
-    override fun hashCode(): Int {
-        var result = id.hashCode()
-        result = 31 * result + artistName.hashCode()
-        result = 31 * result + wrapperType.hashCode()
-        return result
-    }
+    fun isTrackExplicit(): Boolean = trackExplicitness == "explicit"
 }

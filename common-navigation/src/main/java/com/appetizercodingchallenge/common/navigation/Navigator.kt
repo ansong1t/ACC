@@ -3,8 +3,11 @@ package com.appetizercodingchallenge.common.navigation
 import androidx.core.net.toUri
 import androidx.navigation.NavOptions
 
-fun tvShowDeeplink(collectionId: Long) =
+fun tvShowDetailsDeeplink(collectionId: Long) =
     "com.appetizercodingchallenge://tv-show/$collectionId".toUri()
+
+fun songDetailsDeeplink(trackId: Long) =
+    "com.appetizercodingchallenge://song/$trackId".toUri()
 
 fun defaultNavAnimation(block: ((NavOptions.Builder) -> Unit)? = null) =
     NavOptions.Builder().apply {

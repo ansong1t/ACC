@@ -19,3 +19,5 @@ private fun provideLogger(): AccLogger = AccLogger(BuildConfig.DEBUG)
 private fun provideAppCoroutineDispatchers() = AppCoroutineDispatchers()
 
 private fun provideSimpleDateFormatter() = SimpleDateFormat("MMM dd, yyyy hh:mm:ss", Locale.US)
+
+private fun provideSimpleDateFormatterMonthYear() = SimpleDateFormat("MMM yyyy", Locale.US)

@@ -69,4 +69,6 @@
     <dimen name="space_xlarge">24dp</dimen>
     <dimen name="default_side_space">24dp</dimen>
     <dimen name="default_side_top">20dp</dimen>
+
+    <dimen name="carousel_item_width">150dp</dimen>
 </resources>

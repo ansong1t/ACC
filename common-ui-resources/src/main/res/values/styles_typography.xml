@@ -22,6 +22,13 @@
         <item name="android:textColor">?attr/colorPrimary</item>
     </style>
 
+    <style name="TextAppearance.Acc.Headline4" parent="TextAppearance.Acc.Headline3">
+        <item name="fontFamily">@font/sf_ui_text_bold</item>
+        <item name="android:fontFamily">@font/sf_ui_text_bold</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:textColor">?attr/colorPrimary</item>
+    </style>
+
     <style name="TextAppearance.Acc.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
         <item name="fontFamily">@font/sf_ui_text_semibold</item>
         <item name="android:fontFamily">@font/sf_ui_text_semibold</item>
