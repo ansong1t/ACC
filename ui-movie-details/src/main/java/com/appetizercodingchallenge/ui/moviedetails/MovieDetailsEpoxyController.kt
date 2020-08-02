@@ -98,6 +98,10 @@ internal class MovieDetailsEpoxyController(private var context: Context?) : Epox
             }
         }
 
+        vertSpacerSmall {
+            id("space_before_season_title")
+        }
+
         if (state.isLoading) {
             infiniteLoading {
                 id("infinite_loading_tv_show_details")

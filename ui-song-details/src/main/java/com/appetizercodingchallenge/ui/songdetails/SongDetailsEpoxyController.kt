@@ -111,6 +111,10 @@ internal class SongDetailsEpoxyController(private var context: Context?) : Epoxy
             }
         }
 
+        vertSpacerSmall {
+            id("space_before_season_title")
+        }
+
         if (state.isLoading) {
             infiniteLoading {
                 id("infinite_loading_song_details")

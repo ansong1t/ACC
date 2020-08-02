@@ -54,6 +54,10 @@ internal class TvShowDetailsEpoxyController(private var context: Context?) : Epo
             }
         }
 
+        vertSpacerSmall {
+            id("space_before_season_title")
+        }
+
         if (state.isLoading) {
             infiniteLoading {
                 id("infinite_loading_tv_show_details")
