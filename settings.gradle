@@ -1,3 +1,4 @@
+include ':ui-movie-details'
 include ':ui-song-details'
 include ':ui-tv-show-details'
 include ':ui-item-details'

@@ -7,12 +7,12 @@
     <fragment
         android:id="@+id/itemsFragment"
         android:name="com.appetizercodingchallenge.ui.items.ItemsFragment"
-        android:label="fragment_items" />
+        android:label="Items" />
 
     <fragment
         android:id="@+id/tvShowDetailsFragment"
         android:name="com.appetizercodingchallenge.ui.tvshowdetails.TvShowDetailsFragment"
-        android:label="fragment_tv_show_details_fragment">
+        android:label="TV Show Details">
 
         <argument
             android:name="collection_id"
@@ -25,7 +25,7 @@
     <fragment
         android:id="@+id/songDetailsFragment"
         android:name="com.appetizercodingchallenge.ui.songdetails.SongDetailsFragment"
-        android:label="fragment_song_details_fragment">
+        android:label="Song Details">
 
         <argument
             android:name="track_id"
@@ -33,6 +33,19 @@
 
         <deepLink
             app:uri="com.appetizercodingchallenge://song/{track_id}" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/movieDetailsFragment"
+        android:name="com.appetizercodingchallenge.ui.moviedetails.MovieDetailsFragment"
+        android:label="Movie Details">
+
+        <argument
+            android:name="track_id"
+            app:argType="long" />
+
+        <deepLink
+            app:uri="com.appetizercodingchallenge://movie/{track_id}" />
     </fragment>
 
 </navigation>

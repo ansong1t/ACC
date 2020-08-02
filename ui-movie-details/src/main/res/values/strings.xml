@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="related_movies">Related Movies</string>
+    <string name="movies_you_may_like">Movies You May Like</string>
+</resources>

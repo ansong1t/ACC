@@ -9,6 +9,9 @@ fun tvShowDetailsDeeplink(collectionId: Long) =
 fun songDetailsDeeplink(trackId: Long) =
     "com.appetizercodingchallenge://song/$trackId".toUri()
 
+fun movieDetailsDeeplink(trackId: Long) =
+    "com.appetizercodingchallenge://movie/$trackId".toUri()
+
 fun defaultNavAnimation(block: ((NavOptions.Builder) -> Unit)? = null) =
     NavOptions.Builder().apply {
         block?.invoke(this)

@@ -4,6 +4,7 @@ import android.content.Context
 import android.os.Debug
 import androidx.room.Room
 import com.appetizercodingchallenge.data.daos.ItemDao
+import com.appetizercodingchallenge.data.daos.MovieDao
 import com.appetizercodingchallenge.data.daos.SongDao
 import com.appetizercodingchallenge.data.daos.TvShowDao
 import org.koin.dsl.module
@@ -13,6 +14,7 @@ val dbModules = module {
     factory { provideItemDao(get()) }
     factory { provideTvShowDao(get()) }
     factory { provideSongDao(get()) }
+    factory { provideMovieDao(get()) }
 }
 
 @Suppress("SpreadOperator")
@@ -33,3 +35,4 @@ private fun provideDatabase(
 private fun provideItemDao(db: AccRoomDatabase): ItemDao = db.itemDao()
 private fun provideTvShowDao(db: AccRoomDatabase): TvShowDao = db.tvShowDao()
 private fun provideSongDao(db: AccRoomDatabase): SongDao = db.songDao()
+private fun provideMovieDao(db: AccRoomDatabase): MovieDao = db.movieDao()

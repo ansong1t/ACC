@@ -101,9 +101,7 @@ internal class SongDetailsEpoxyController(private var context: Context?) : Epoxy
                             id("carousel_item_${song.id}")
                             imageUrl(song.artworkUrl100)
                             trackName(song.trackName)
-                            dateReleased(
-                                formatDate(song.releaseDate, outputFormat = "yyyy")
-                            )
+                            dateReleased(song.releaseDate)
                             onItemClicked { _ ->
                                 callbacks?.onTrackClicked(song.id)
                             }

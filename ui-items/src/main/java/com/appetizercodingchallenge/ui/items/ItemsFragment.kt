@@ -18,6 +18,8 @@ import com.appetizercodingchallenge.api.UiError
 import com.appetizercodingchallenge.api.UiLoading
 import com.appetizercodingchallenge.common.FragmentWithBinding
 import com.appetizercodingchallenge.common.layout.headline3
+import com.appetizercodingchallenge.common.navigation.defaultNavAnimation
+import com.appetizercodingchallenge.common.navigation.movieDetailsDeeplink
 import com.appetizercodingchallenge.common.navigation.songDetailsDeeplink
 import com.appetizercodingchallenge.common.navigation.tvShowDetailsDeeplink
 import com.appetizercodingchallenge.common.paging.PagingEpoxyController
@@ -157,9 +159,23 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
                     .onClickListener(View.OnClickListener {
                         when (item.itemEntry.kind) {
                             ListItemType.TV_SHOW ->
-                                findNavController().navigate(tvShowDetailsDeeplink(item.itemEntry.trackId))
+                                findNavController().navigate(
+                                    tvShowDetailsDeeplink(item.itemEntry.trackId),
+                                    defaultNavAnimation()
+                                )
                             ListItemType.SONG ->
-                                findNavController().navigate(songDetailsDeeplink(item.itemEntry.trackId))
+                                findNavController().navigate(
+                                    songDetailsDeeplink(item.itemEntry.trackId),
+                                    defaultNavAnimation()
+                                )
+                            ListItemType.FEATURE_MOVIE ->
+                                findNavController().navigate(
+                                    movieDetailsDeeplink(item.itemEntry.trackId),
+                                    defaultNavAnimation()
+                                )
+                            else -> {
+                                // TODO audio book
+                            }
                         }
                     })
             }

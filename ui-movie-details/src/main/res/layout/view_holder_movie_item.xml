@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="counter"
+            type="Integer" />
+
+        <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
+            name="title"
+            type="String" />
+
+        <variable
+            name="description"
+            type="String" />
+
+        <variable
+            name="duration"
+            type="Long" />
+
+        <variable
+            name="currency"
+            type="String" />
+
+        <variable
+            name="price"
+            type="Double" />
+
+        <variable
+            name="isCurrentTrack"
+            type="Boolean" />
+
+        <variable
+            name="onItemClick"
+            type="android.view.View.OnClickListener" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_vert_20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".2" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_vert_25"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".25" />
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?selectableItemBackground"
+            android:clickable="@{!isCurrentTrack}"
+            android:focusable="@{!isCurrentTrack}"
+            android:onClick="@{onItemClick}"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintEnd_toEndOf="@id/gl_vert_20"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:load="@{imageUrl}" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            style="?attr/textAppearanceHeadline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:clickable="@{!isCurrentTrack}"
+            android:focusable="@{!isCurrentTrack}"
+            android:onClick="@{onItemClick}"
+            android:text="@{String.format(`#%s: %s`, counter, title)}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toEndOf="@id/gl_vert_25"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_price"
+            style="?attr/textAppearanceSubtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:itemCurrency="@{currency}"
+            app:itemPrice="@{price}"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_title" />
+
+        <TextView
+            android:id="@+id/tv_duration"
+            style="?attr/textAppearanceSubtitle2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            app:duration="@{duration}"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_price" />
+
+        <TextView
+            android:id="@+id/tv_description"
+            style="?textAppearanceBody2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?selectableItemBackground"
+            android:text="@{description}"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
+            app:layout_constraintTop_toBottomOf="@id/tv_duration"
+            app:maxLinesToggle="@{2}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

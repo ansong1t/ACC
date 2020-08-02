@@ -1,6 +1,7 @@
 package com.appetizercodingchallenge.appmodules
 
 import com.appetizercodingchallenge.ui.items.ItemsViewModel
+import com.appetizercodingchallenge.ui.moviedetails.MovieDetailsViewModel
 import com.appetizercodingchallenge.ui.saveditems.SavedItemsViewModel
 import com.appetizercodingchallenge.ui.songdetails.SongDetailsViewModel
 import com.appetizercodingchallenge.ui.tvshowdetails.TvShowDetailsViewModel
@@ -18,4 +19,5 @@ val viewModelModule = module {
     viewModel { ItemsViewModel(get(), get(), get()) }
     viewModel { (collectionId: Long) -> TvShowDetailsViewModel(collectionId, get()) }
     viewModel { (trackId: Long) -> SongDetailsViewModel(trackId, get(), get(), get()) }
+    viewModel { (trackId: Long) -> MovieDetailsViewModel(trackId, get(), get(), get()) }
 }

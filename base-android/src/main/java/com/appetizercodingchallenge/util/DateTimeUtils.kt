@@ -1,15 +1,15 @@
 package com.appetizercodingchallenge.util
 
+import org.threeten.bp.Duration
 import java.text.ParseException
 import java.text.SimpleDateFormat
 import java.util.Locale
 import java.util.Date
 import java.util.TimeZone
-import java.util.concurrent.TimeUnit
 
 fun formatDate(
     date: String,
-    parseFormat: String = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'",
+    parseFormat: String = "yyyy-MM-dd'T'HH:mm:ss'Z'",
     outputFormat: String = "yyyy-MM-dd"
 ): String {
     val format = SimpleDateFormat(parseFormat, Locale.US)
@@ -24,14 +24,16 @@ fun formatDate(
 }
 
 fun getDuration(millis: Long): String {
-    return String.format(
-        "%d:%02d",
-        TimeUnit.MILLISECONDS.toMinutes(millis),
-        TimeUnit.MILLISECONDS.toSeconds(millis) -
-                TimeUnit.MINUTES.toSeconds(
-                    TimeUnit.MILLISECONDS.toMinutes(
-                        millis
-                    )
-                )
+    val duration = Duration.ofMillis(millis)
+    return if (duration.toHours() > 0) String.format(
+        "%d:%02d:%02d",
+        duration.toHours(),
+        duration.toMinutes() - (duration.toHours() * 60),
+        duration.seconds - (duration.toMinutes() * 60)
     )
+    else String.format(
+            "%d:%02d",
+            duration.toMinutes(),
+            duration.seconds - (duration.toMinutes() * 60)
+        )
 }
