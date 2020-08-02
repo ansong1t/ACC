@@ -9,7 +9,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="colorSecondary">@color/colorAccent</item>
         <item name="colorSurface">@color/white</item>
-        <item name="colorPrimarySurface">@color/martini</item>
+        <item name="colorPrimarySurface">@color/alto</item>
         <item name="colorOnSurface">@color/mine_shaft</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="colorControlHighlight">@color/colorRipple</item>

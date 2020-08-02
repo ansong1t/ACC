@@ -14,10 +14,12 @@ fun ImageView.loadImage(
     path: String?,
     circleCrop: Boolean?
 ) {
-    if (oldPath != path || oldCircleCrop != circleCrop) {
+    if (oldPath != path) {
         load(path) {
             crossfade(true)
-            if (circleCrop == true) {
+            placeholder(R.drawable.image_loading_placeholder)
+            error(R.drawable.image_loading_placeholder)
+            if (oldCircleCrop != circleCrop && circleCrop == true) {
                 transformations(CircleCropTransformation())
             }
         }

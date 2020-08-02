@@ -94,7 +94,7 @@ internal class SongDetailsEpoxyController(private var context: Context?) : Epoxy
 
             carousel {
                 id("related_songs_carousels")
-                numViewsToShowOnScreen(3f)
+                numViewsToShowOnScreen(3.2f)
                 models(
                     it.map { song ->
                         SongCarouselItemBindingModel_().apply {

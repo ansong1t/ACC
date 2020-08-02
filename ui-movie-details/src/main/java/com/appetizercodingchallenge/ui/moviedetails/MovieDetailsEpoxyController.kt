@@ -81,7 +81,7 @@ internal class MovieDetailsEpoxyController(private var context: Context?) : Epox
 
             carousel {
                 id("user_must_like_movie_carousels")
-                numViewsToShowOnScreen(3f)
+                numViewsToShowOnScreen(3.2f)
                 models(
                     it.map { movie ->
                         MovieCarouselItemBindingModel_().apply {
