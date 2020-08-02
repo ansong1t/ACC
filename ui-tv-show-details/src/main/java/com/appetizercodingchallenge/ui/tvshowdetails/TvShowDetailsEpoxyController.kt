@@ -55,7 +55,7 @@ internal class TvShowDetailsEpoxyController(private var context: Context?) : Epo
         }
 
         vertSpacerSmall {
-            id("space_before_season_title")
+            id("space_bottom")
         }
 
         if (state.isLoading) {

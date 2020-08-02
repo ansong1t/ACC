@@ -18,6 +18,7 @@ import com.appetizercodingchallenge.api.UiError
 import com.appetizercodingchallenge.api.UiLoading
 import com.appetizercodingchallenge.common.FragmentWithBinding
 import com.appetizercodingchallenge.common.layout.headline3
+import com.appetizercodingchallenge.common.navigation.audioBookDetailsDeeplink
 import com.appetizercodingchallenge.common.navigation.defaultNavAnimation
 import com.appetizercodingchallenge.common.navigation.movieDetailsDeeplink
 import com.appetizercodingchallenge.common.navigation.songDetailsDeeplink
@@ -157,26 +158,14 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
                     .currency(item.currency())
                     .kind(item.kind())
                     .onClickListener(View.OnClickListener {
-                        when (item.itemEntry.kind) {
-                            ListItemType.TV_SHOW ->
-                                findNavController().navigate(
-                                    tvShowDetailsDeeplink(item.itemEntry.trackId),
-                                    defaultNavAnimation()
-                                )
-                            ListItemType.SONG ->
-                                findNavController().navigate(
-                                    songDetailsDeeplink(item.itemEntry.trackId),
-                                    defaultNavAnimation()
-                                )
-                            ListItemType.FEATURE_MOVIE ->
-                                findNavController().navigate(
-                                    movieDetailsDeeplink(item.itemEntry.trackId),
-                                    defaultNavAnimation()
-                                )
-                            else -> {
-                                // TODO audio book
-                            }
-                        }
+                        findNavController().navigate(
+                            when (item.itemEntry.kind) {
+                                ListItemType.TV_SHOW -> tvShowDetailsDeeplink(item.itemEntry.trackId)
+                                ListItemType.SONG -> songDetailsDeeplink(item.itemEntry.trackId)
+                                ListItemType.FEATURE_MOVIE -> movieDetailsDeeplink(item.itemEntry.trackId)
+                                else -> audioBookDetailsDeeplink(item.itemEntry.trackId)
+                            }, defaultNavAnimation()
+                        )
                     })
             }
 

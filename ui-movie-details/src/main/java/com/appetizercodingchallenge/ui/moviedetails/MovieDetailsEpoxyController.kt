@@ -99,7 +99,7 @@ internal class MovieDetailsEpoxyController(private var context: Context?) : Epox
         }
 
         vertSpacerSmall {
-            id("space_before_season_title")
+            id("space_bottom")
         }
 
         if (state.isLoading) {

@@ -1,36 +1,60 @@
+import com.appetizercodingchallenge.Libs
+
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs.kotlin'
+
+kapt {
+    correctErrorTypes = true
+    useBuildCache = true
+}
 
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.0"
+    compileSdkVersion buildConfig.compileSdk
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-        consumerProguardFiles "consumer-rules.pro"
+        minSdkVersion buildConfig.minSdk
     }
 
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-        }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = "1.8"
+    }
+
+    buildFeatures {
+        dataBinding true
     }
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    implementation 'androidx.core:core-ktx:1.3.1'
-    implementation 'androidx.appcompat:appcompat:1.1.0'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation fileTree(dir: "libs", include: ["*.jar"])
+    implementation project(':base-android')
+    implementation project(':data')
+    implementation project(':domain')
+    implementation project(':common-layout')
+    implementation project(':common-ui-resources')
+    implementation project(':common-ui-view')
+    implementation project(':common-databinding')
+    implementation project(':common-navigation')
+    implementation project(':common-image-loading')
+    implementation project(':common-epoxy')
 
+    implementation Libs.AndroidX.recyclerview
+    implementation Libs.AndroidX.swiperefresh
+    implementation Libs.AndroidX.constraintLayout
+    implementation Libs.AndroidX.coreKtx
+    implementation Libs.AndroidX.Navigation.fragment
+
+    implementation Libs.Koin.android
+    implementation Libs.Koin.viewmodel
+
+    implementation Libs.Insetter.core
+    implementation Libs.Insetter.ktx
+
+    implementation Libs.Anko.common
+
+    kapt Libs.Epoxy.processor
 }

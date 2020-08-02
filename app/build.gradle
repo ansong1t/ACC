@@ -99,6 +99,7 @@ dependencies {
     implementation project(':domain')
 
     implementation project(':ui-items')
+    implementation project(':ui-audiobook-details')
     implementation project(':ui-tv-show-details')
     implementation project(':ui-movie-details')
     implementation project(':ui-song-details')

@@ -48,4 +48,17 @@
             app:uri="com.appetizercodingchallenge://movie/{track_id}" />
     </fragment>
 
+    <fragment
+        android:id="@+id/audioBookDetailsFragment"
+        android:name="com.appetizercodingchallenge.ui.audiobookdetails.AudioBookDetailsFragment"
+        android:label="Audiobook Details">
+
+        <argument
+            android:name="collection_id"
+            app:argType="long" />
+
+        <deepLink
+            app:uri="com.appetizercodingchallenge://audiobook/{collection_id}" />
+    </fragment>
+
 </navigation>

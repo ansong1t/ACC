@@ -1,4 +1,4 @@
-package com.appetizercodingchallenge.ui.songdetails
+package com.appetizercodingchallenge.ui.audiobookdetails
 
 import android.content.Intent
 import android.os.Bundle
@@ -9,10 +9,8 @@ import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.appetizercodingchallenge.common.FragmentWithBinding
-import com.appetizercodingchallenge.common.navigation.defaultNavAnimation
-import com.appetizercodingchallenge.common.navigation.songDetailsDeeplink
 import com.appetizercodingchallenge.ui.SpacingItemDecorator
-import com.appetizercodingchallenge.ui.songdetails.databinding.FragmentSongDetailsBinding
+import com.appetizercodingchallenge.ui.audiobookdetails.databinding.FragmentAudioBookDetailsBinding
 import dev.chrisbanes.insetter.applySystemWindowInsetsToPadding
 import dev.chrisbanes.insetter.setEdgeToEdgeSystemUiFlags
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,24 +20,24 @@ import org.koin.core.parameter.parametersOf
 
 @FlowPreview
 @ExperimentalCoroutinesApi
-class SongDetailsFragment :
-    FragmentWithBinding<FragmentSongDetailsBinding>() {
+class AudioBookDetailsFragment :
+    FragmentWithBinding<FragmentAudioBookDetailsBinding>() {
 
-    private val args: SongDetailsFragmentArgs by navArgs()
+    private val args: AudioBookDetailsFragmentArgs by navArgs()
 
-    private val viewModel by viewModel<SongDetailsViewModel> {
-        parametersOf(args.trackId)
+    private val viewModel by viewModel<AudioBookDetailsViewModel> {
+        parametersOf(args.collectionId)
     }
 
-    private var controller: SongDetailsEpoxyController? = null
+    private var controller: AudioBookDetailsEpoxyController? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        controller = SongDetailsEpoxyController(requireContext())
+        controller = AudioBookDetailsEpoxyController(requireContext())
     }
 
     override fun onViewCreated(
-        binding: FragmentSongDetailsBinding,
+        binding: FragmentAudioBookDetailsBinding,
         savedInstanceState: Bundle?
     ) {
         binding.toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
@@ -48,18 +46,11 @@ class SongDetailsFragment :
         binding.parent.setEdgeToEdgeSystemUiFlags(true)
         binding.rvScrollable.apply {
             setController(controller!!.apply {
-                callbacks = object : SongDetailsEpoxyController.Callbacks {
+                callbacks = object : AudioBookDetailsEpoxyController.Callbacks {
                     override fun onPreviewUrl(url: String) {
                         startActivity(Intent(Intent.ACTION_VIEW).apply {
                             data = url.toUri()
                         })
-                    }
-
-                    override fun onTrackClicked(trackId: Long) {
-                        findNavController().navigate(
-                            songDetailsDeeplink(trackId),
-                            defaultNavAnimation()
-                        )
                     }
                 }
             })
@@ -77,8 +68,8 @@ class SongDetailsFragment :
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): FragmentSongDetailsBinding =
-        FragmentSongDetailsBinding.inflate(inflater, container, false)
+    ): FragmentAudioBookDetailsBinding =
+        FragmentAudioBookDetailsBinding.inflate(inflater, container, false)
 
     override fun onDestroy() {
         binding?.rvScrollable?.clear()
@@ -92,7 +83,7 @@ class SongDetailsFragment :
         controller?.removeCallback()
     }
 
-    private fun render(state: SongDetailsViewState) {
+    private fun render(state: AudioBookDetailsViewState) {
         val binding = requireBinding()
         binding.state = state
         controller?.state = state

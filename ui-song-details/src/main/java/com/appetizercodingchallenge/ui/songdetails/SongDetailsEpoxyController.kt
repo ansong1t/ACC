@@ -20,6 +20,7 @@ internal class SongDetailsEpoxyController(private var context: Context?) : Epoxy
     var callbacks: Callbacks? by observable(null, ::requestModelBuild)
 
     interface Callbacks {
+        fun onPreviewUrl(url: String)
         fun onTrackClicked(trackId: Long)
     }
 
@@ -40,9 +41,12 @@ internal class SongDetailsEpoxyController(private var context: Context?) : Epoxy
                     .bold { append(formatDate(state.song.releaseDate, outputFormat = "MMM yyyy")) }
                     .append("\n")
                     .append("Duration: ")
-                    .bold { append(getDuration(state.song.trackTimeMillis)) }.toString()
+                    .bold { append(getDuration(state.song.trackTimeMillis)) }
             )
             imageUrl(state.song.artworkUrl100)
+            onViewPreviewClick { _ ->
+                callbacks?.onPreviewUrl(state.song.previewUrl)
+            }
         }
 
         vertSpacerSmall {
@@ -112,7 +116,7 @@ internal class SongDetailsEpoxyController(private var context: Context?) : Epoxy
         }
 
         vertSpacerSmall {
-            id("space_before_season_title")
+            id("space_bottom")
         }
 
         if (state.isLoading) {

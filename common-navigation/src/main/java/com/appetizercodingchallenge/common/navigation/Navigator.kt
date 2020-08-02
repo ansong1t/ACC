@@ -12,6 +12,9 @@ fun songDetailsDeeplink(trackId: Long) =
 fun movieDetailsDeeplink(trackId: Long) =
     "com.appetizercodingchallenge://movie/$trackId".toUri()
 
+fun audioBookDetailsDeeplink(collectionId: Long) =
+    "com.appetizercodingchallenge://audiobook/$collectionId".toUri()
+
 fun defaultNavAnimation(block: ((NavOptions.Builder) -> Unit)? = null) =
     NavOptions.Builder().apply {
         block?.invoke(this)
