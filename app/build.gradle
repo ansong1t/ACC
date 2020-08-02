@@ -171,5 +171,6 @@ dependencies {
     implementation Libs.threeTenAbp
     debugImplementation Libs.leakCanary
     debugImplementation Libs.chucker
+    releaseImplementation Libs.chuckerNoop
 
 }

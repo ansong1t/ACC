@@ -12,6 +12,7 @@ object Libs {
     const val threeTenBpNoTzdb = "$threeTenBp:no-tzdb"
     const val threeTenAbp = "com.jakewharton.threetenabp:threetenabp:1.2.4"
     const val chucker = "com.github.chuckerteam.chucker:library:3.2.0"
+    const val chuckerNoop = "com.github.chuckerteam.chucker:library-no-op:3.2.0"
     const val mockito = "org.mockito:mockito-inline:2.25.0"
     const val store = "com.dropbox.mobile.store:store4:4.0.0-alpha06"
     const val timber = "com.jakewharton.timber:timber:4.7.1"
