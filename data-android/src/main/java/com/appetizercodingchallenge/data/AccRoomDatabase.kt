@@ -4,6 +4,7 @@ import androidx.room.Database
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import com.appetizercodingchallenge.data.converters.ItemConverter
+import com.appetizercodingchallenge.data.entities.AudioBook
 import com.appetizercodingchallenge.data.entities.FeatureMovie
 import com.appetizercodingchallenge.data.entities.Song
 import com.appetizercodingchallenge.data.entities.ItemEntry
@@ -14,6 +15,7 @@ import dev.matrix.roomigrant.GenerateRoomMigrations
 
 @Database(
     entities = [
+        AudioBook::class,
         Song::class,
         FeatureMovie::class,
         TvShow::class,
@@ -21,7 +23,7 @@ import dev.matrix.roomigrant.GenerateRoomMigrations
         ItemEntry::class,
         SearchedItemEntry::class
     ],
-    version = 2
+    version = 1
 )
 @TypeConverters(ItemConverter::class)
 @GenerateRoomMigrations

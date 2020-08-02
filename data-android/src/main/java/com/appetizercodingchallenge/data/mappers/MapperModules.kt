@@ -7,4 +7,5 @@ val mapperModules = module {
     factory { ItemResponseToFeatureMovieMapper() }
     factory { ItemResponseToTvEpisodeMapper() }
     factory { ItemResponseToTvShowMapper() }
+    factory { ItemResponseToAudioBookMapper() }
 }

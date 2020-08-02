@@ -3,6 +3,7 @@ package com.appetizercodingchallenge.data.repositories
 import androidx.paging.DataSource
 import com.appetizercodingchallenge.data.daos.ItemDao
 import com.appetizercodingchallenge.data.datasources.GetItemDataSource
+import com.appetizercodingchallenge.data.mappers.ItemResponseToAudioBookMapper
 import com.appetizercodingchallenge.data.mappers.ItemResponseToFeatureMovieMapper
 import com.appetizercodingchallenge.data.mappers.ItemResponseToSongMapper
 import com.appetizercodingchallenge.data.mappers.ItemResponseToTvEpisodeMapper
@@ -16,7 +17,8 @@ class ItemRepositoryImpl(
     private val itemResponseToSongMapper: ItemResponseToSongMapper,
     private val itemResponseToFeatureMovieMapper: ItemResponseToFeatureMovieMapper,
     private val itemResponseToTvEpisodeMapper: ItemResponseToTvEpisodeMapper,
-    private val itemResponseToTvShowMapper: ItemResponseToTvShowMapper
+    private val itemResponseToTvShowMapper: ItemResponseToTvShowMapper,
+    private val itemResponseToAudioBookMapper: ItemResponseToAudioBookMapper
 ) : ItemRepository {
 
     override fun observePagedSearchedItems(): DataSource.Factory<Int, SearchedItemEntryWithDetails> =
@@ -37,7 +39,8 @@ class ItemRepositoryImpl(
             itemResponseToSongMapper,
             itemResponseToFeatureMovieMapper,
             itemResponseToTvEpisodeMapper,
-            itemResponseToTvShowMapper
+            itemResponseToTvShowMapper,
+            itemResponseToAudioBookMapper
         )
     }
 }

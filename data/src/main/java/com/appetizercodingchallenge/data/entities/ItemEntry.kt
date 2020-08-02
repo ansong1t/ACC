@@ -8,10 +8,10 @@ import com.appetizercodingchallenge.data.types.ListItemType
 
 @Entity(
     tableName = "item_entries",
-    indices = [Index(value = ["track_id"], unique = true)]
+    indices = [Index(value = ["item_id"], unique = true)]
 )
 data class ItemEntry(
     @ColumnInfo(name = "id") @PrimaryKey(autoGenerate = true) override val id: Long = 0,
-    @ColumnInfo(name = "track_id") val trackId: Long = 0,
+    @ColumnInfo(name = "item_id") val trackId: Long = 0,
     @ColumnInfo(name = "kind") val kind: ListItemType = ListItemType.UNKNOWN
 ) : AccEntity

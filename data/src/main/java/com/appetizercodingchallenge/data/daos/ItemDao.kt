@@ -6,12 +6,14 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
+import com.appetizercodingchallenge.data.entities.AudioBook
 import com.appetizercodingchallenge.data.entities.FeatureMovie
 import com.appetizercodingchallenge.data.entities.Song
 import com.appetizercodingchallenge.data.entities.ItemEntry
 import com.appetizercodingchallenge.data.entities.SearchedItemEntry
 import com.appetizercodingchallenge.data.entities.TvEpisode
 import com.appetizercodingchallenge.data.entities.TvShow
+import com.appetizercodingchallenge.data.mappers.ItemResponseToAudioBookMapper
 import com.appetizercodingchallenge.data.mappers.ItemResponseToFeatureMovieMapper
 import com.appetizercodingchallenge.data.mappers.ItemResponseToSongMapper
 import com.appetizercodingchallenge.data.mappers.ItemResponseToTvEpisodeMapper
@@ -47,7 +49,8 @@ abstract class ItemDao : EntityDao<Song>() {
         songMapper: ItemResponseToSongMapper,
         featureMovieMapper: ItemResponseToFeatureMovieMapper,
         tvEpisodeMapper: ItemResponseToTvEpisodeMapper,
-        tvShowMapper: ItemResponseToTvShowMapper
+        tvShowMapper: ItemResponseToTvShowMapper,
+        audioBookMapper: ItemResponseToAudioBookMapper
     ) {
         val tvEpisodes = arrayListOf<TvEpisode>()
         items.forEach {
@@ -59,12 +62,24 @@ abstract class ItemDao : EntityDao<Song>() {
                     tvEpisodes.add(tvEpisodeMapper(it))
                 }
                 else -> {
-                    // TODO save audio book
+                    if (it.wrapperType == "audiobook") {
+                        insertAudioBook(audioBookMapper(it))
+                    }
                 }
             }
             val entry = ItemEntry(
-                trackId = if (responseToTrackType(it.kind) != ListItemType.TV_SHOW) it.trackId else it.collectionId,
-                kind = responseToTrackType(it.kind)
+                trackId = when (it.wrapperType) {
+                    "track" -> when (responseToTrackType(it.kind)) {
+                        ListItemType.TV_SHOW, ListItemType.AUDIOBOOK -> it.collectionId
+                        else -> it.trackId
+                    }
+                    else -> it.trackId
+                },
+                kind = when (it.wrapperType) {
+                    "track" -> responseToTrackType(it.kind)
+                    "audiobook" -> ListItemType.AUDIOBOOK
+                    else -> ListItemType.UNKNOWN
+                }
             )
             insertItemEntry(entry)
         }
@@ -88,4 +103,7 @@ abstract class ItemDao : EntityDao<Song>() {
 
     @Insert(entity = TvShow::class, onConflict = OnConflictStrategy.REPLACE)
     abstract suspend fun insertTvShow(show: TvShow): Long
+
+    @Insert(entity = AudioBook::class, onConflict = OnConflictStrategy.REPLACE)
+    abstract suspend fun insertAudioBook(audioBook: AudioBook): Long
 }

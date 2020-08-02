@@ -3,6 +3,7 @@ package com.appetizercodingchallenge.data.resultentities
 import androidx.room.Embedded
 import androidx.room.Ignore
 import androidx.room.Relation
+import com.appetizercodingchallenge.data.entities.AudioBook
 import com.appetizercodingchallenge.data.entities.FeatureMovie
 import com.appetizercodingchallenge.data.entities.Song
 import com.appetizercodingchallenge.data.entities.ItemEntry
@@ -15,22 +16,28 @@ data class ItemEntryWithDetails(
     var itemEntry: ItemEntry = ItemEntry(),
 
     @Relation(
-        parentColumn = "track_id",
+        parentColumn = "item_id",
         entityColumn = "track_id"
     )
     var song: Song? = Song(),
 
     @Relation(
-        parentColumn = "track_id",
+        parentColumn = "item_id",
         entityColumn = "track_id"
     )
     var featureMovie: FeatureMovie? = null,
 
     @Relation(
-        parentColumn = "track_id",
+        parentColumn = "item_id",
         entityColumn = "collection_id"
     )
-    var tvShow: TvShow? = null
+    var tvShow: TvShow? = null,
+
+    @Relation(
+        parentColumn = "item_id",
+        entityColumn = "collection_id"
+    )
+    var audioBook: AudioBook? = null
 ) {
 
     @Ignore
@@ -44,6 +51,7 @@ data class ItemEntryWithDetails(
         ListItemType.SONG -> song!!.trackName
         ListItemType.FEATURE_MOVIE -> featureMovie!!.trackName
         ListItemType.TV_SHOW -> tvShow!!.collectionName
+        ListItemType.AUDIOBOOK -> audioBook!!.collectionName
         else -> "No track Name"
     }
 
@@ -52,6 +60,7 @@ data class ItemEntryWithDetails(
         ListItemType.SONG -> song!!.primaryGenreName
         ListItemType.FEATURE_MOVIE -> featureMovie!!.primaryGenreName
         ListItemType.TV_SHOW -> tvShow!!.primaryGenreName
+        ListItemType.AUDIOBOOK -> audioBook!!.primaryGenreName
         else -> "No Genre"
     }
 
@@ -60,6 +69,7 @@ data class ItemEntryWithDetails(
         ListItemType.SONG -> song!!.artworkUrl100
         ListItemType.FEATURE_MOVIE -> featureMovie!!.artworkUrl100
         ListItemType.TV_SHOW -> tvShow!!.artworkUrl100
+        ListItemType.AUDIOBOOK -> audioBook!!.artworkUrl100
         else -> ""
     }
 
@@ -68,6 +78,7 @@ data class ItemEntryWithDetails(
         ListItemType.SONG -> song!!.trackPrice
         ListItemType.FEATURE_MOVIE -> featureMovie!!.trackPrice
         ListItemType.TV_SHOW -> tvShow!!.collectionPrice
+        ListItemType.AUDIOBOOK -> audioBook!!.collectionPrice
         else -> 0.0
     }
 
@@ -76,6 +87,7 @@ data class ItemEntryWithDetails(
         ListItemType.SONG -> song!!.currency
         ListItemType.FEATURE_MOVIE -> featureMovie!!.currency
         ListItemType.TV_SHOW -> tvShow!!.currency
+        ListItemType.AUDIOBOOK -> audioBook!!.currency
         else -> ""
     }
 

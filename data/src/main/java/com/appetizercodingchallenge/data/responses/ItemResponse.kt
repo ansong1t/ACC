@@ -37,10 +37,14 @@ data class ItemResponse(
     val collectionViewUrl: String = "",
     @Json(name = "contentAdvisoryRating")
     val contentAdvisoryRating: String = "",
+    @Json(name = "copyright")
+    val copyright: String = "",
     @Json(name = "country")
     val country: String = "",
     @Json(name = "currency")
     val currency: String = "",
+    @Json(name = "description")
+    val description: String = "",
     @Json(name = "discCount")
     val discCount: Int = 0,
     @Json(name = "discNumber")
