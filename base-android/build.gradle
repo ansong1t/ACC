@@ -40,6 +40,8 @@ dependencies {
     api Libs.AndroidX.Fragment.fragment
     api Libs.AndroidX.coreKtx
 
+    api Libs.Google.material
+
     implementation Libs.timber
     implementation Libs.threeTenAbp
 

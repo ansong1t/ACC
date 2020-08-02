@@ -1,8 +1,10 @@
 package com.appetizercodingchallenge.ui.moviedetails
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.net.toUri
 import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -52,6 +54,12 @@ class MovieDetailsFragment :
                             movieDetailsDeeplink(trackId),
                             defaultNavAnimation()
                         )
+                    }
+
+                    override fun onPreviewUrl(url: String) {
+                        startActivity(Intent(Intent.ACTION_VIEW).apply {
+                            data = url.toUri()
+                        })
                     }
                 }
             })

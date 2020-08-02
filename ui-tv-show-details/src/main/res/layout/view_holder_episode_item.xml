@@ -21,17 +21,46 @@
             type="String" />
 
         <variable
+            name="imageUrl"
+            type="String" />
+
+        <variable
             name="price"
             type="Double" />
 
         <variable
-            name="onViewMoreClick"
+            name="onViewPreviewClick"
             type="android.view.View.OnClickListener" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_vert_30"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".3" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/gl_vert_35"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent=".35" />
+
+        <ImageView
+            android:id="@+id/iv_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="2:3"
+            app:layout_constraintEnd_toEndOf="@id/gl_vert_30"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:load="@{imageUrl}" />
 
         <TextView
             android:id="@+id/tv_title"
@@ -42,7 +71,7 @@
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/gl_vert_35"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
@@ -53,7 +82,7 @@
             android:textColor="@color/black"
             app:itemCurrency="@{currency}"
             app:itemPrice="@{price}"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
             app:layout_constraintTop_toBottomOf="@id/tv_title" />
 
         <TextView
@@ -66,24 +95,18 @@
             app:layout_constrainedWidth="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/tv_title"
             app:layout_constraintTop_toBottomOf="@id/tv_price"
             app:maxLinesToggle="@{2}" />
 
-        <TextView
-            android:id="@+id/tv_view_more_details"
-            style="?textAppearanceHeadline4"
+        <com.google.android.material.button.MaterialButton
+            style="@style/Widget.MaterialComponents.Button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="?selectableItemBackground"
-            android:padding="@dimen/padding_4"
-            android:text="@string/more_details"
-            app:layout_constrainedWidth="true"
-            android:onClick="@{onViewMoreClick}"
+            android:layout_marginTop="@dimen/space_small"
+            android:onClick="@{onViewPreviewClick}"
+            android:text="@string/view_preview"
             app:layout_constraintEnd_toEndOf="parent"
-            android:drawableEnd="@drawable/ic_baseline_chevron_right_24"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/description" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

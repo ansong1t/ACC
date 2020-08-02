@@ -85,10 +85,6 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
         }
 
         binding.rvItemLists.apply {
-            // We set the item animator to null since it can interfere with the enter/shared element
-            // transitions
-            itemAnimator = null
-
             setController(controller!!)
             addItemDecoration(
                 SpacingItemDecorator(
@@ -133,10 +129,12 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
                 with(modelCollector) {
                     headline3 {
                         id("headline")
+                        val lastTimeVisited = requireContext().getPref().getLastUserVisitedTime()
                         val text = String.format(
-                            getString(R.string.last_date_previously_visited), dateFormatter.format(
-                                requireContext().getPref().getLastUserVisitedTime()
-                            )
+                            getString(R.string.last_date_previously_visited),
+                            if (lastTimeVisited != null) dateFormatter.format(
+                                lastTimeVisited
+                            ) else ""
                         )
                         text(text)
                         onBind { _, view, _ ->
@@ -160,10 +158,10 @@ class ItemsFragment : FragmentWithBinding<FragmentItemsBinding>() {
                     .onClickListener(View.OnClickListener {
                         findNavController().navigate(
                             when (item.itemEntry.kind) {
-                                ListItemType.TV_SHOW -> tvShowDetailsDeeplink(item.itemEntry.trackId)
-                                ListItemType.SONG -> songDetailsDeeplink(item.itemEntry.trackId)
-                                ListItemType.FEATURE_MOVIE -> movieDetailsDeeplink(item.itemEntry.trackId)
-                                else -> audioBookDetailsDeeplink(item.itemEntry.trackId)
+                                ListItemType.TV_SHOW -> tvShowDetailsDeeplink(item.itemEntry.itemId)
+                                ListItemType.SONG -> songDetailsDeeplink(item.itemEntry.itemId)
+                                ListItemType.FEATURE_MOVIE -> movieDetailsDeeplink(item.itemEntry.itemId)
+                                else -> audioBookDetailsDeeplink(item.itemEntry.itemId)
                             }, defaultNavAnimation()
                         )
                     })

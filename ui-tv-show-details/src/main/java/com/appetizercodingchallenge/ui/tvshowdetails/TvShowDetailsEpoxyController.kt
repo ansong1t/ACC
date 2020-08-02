@@ -13,7 +13,7 @@ internal class TvShowDetailsEpoxyController(private var context: Context?) : Epo
     var callbacks: Callbacks? by observable(null, ::requestModelBuild)
 
     interface Callbacks {
-        fun onEpisodeViewMoreClicked(episodeUrl: String)
+        fun onPreviewUrl(url: String)
     }
 
     override fun buildModels() {
@@ -44,8 +44,9 @@ internal class TvShowDetailsEpoxyController(private var context: Context?) : Epo
                 description(it.longDescription)
                 currency(it.currency)
                 price(it.trackPrice)
-                onViewMoreClick { v ->
-                    callbacks?.onEpisodeViewMoreClicked(it.trackViewUrl)
+                imageUrl(it.artworkUrl100)
+                onViewPreviewClick { v ->
+                    callbacks?.onPreviewUrl(it.trackViewUrl)
                 }
             }
 

@@ -34,13 +34,15 @@ class ItemRepositoryImpl(
     override suspend fun updateItems() {
         val result = getItemDataSource()
         val items = result.getOrThrow()
-        itemDao.insertItems(
-            items,
-            itemResponseToSongMapper,
-            itemResponseToFeatureMovieMapper,
-            itemResponseToTvEpisodeMapper,
-            itemResponseToTvShowMapper,
-            itemResponseToAudioBookMapper
-        )
+        itemDao.withTransaction {
+            itemDao.insertItems(
+                items,
+                itemResponseToSongMapper,
+                itemResponseToFeatureMovieMapper,
+                itemResponseToTvEpisodeMapper,
+                itemResponseToTvShowMapper,
+                itemResponseToAudioBookMapper
+            )
+        }
     }
 }

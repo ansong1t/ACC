@@ -47,9 +47,9 @@ class TvShowDetailsFragment :
         binding.rvScrollable.apply {
             setController(controller!!.apply {
                 callbacks = object : TvShowDetailsEpoxyController.Callbacks {
-                    override fun onEpisodeViewMoreClicked(episodeUrl: String) {
+                    override fun onPreviewUrl(url: String) {
                         startActivity(Intent(Intent.ACTION_VIEW).apply {
-                            data = episodeUrl.toUri()
+                            data = url.toUri()
                         })
                     }
                 }

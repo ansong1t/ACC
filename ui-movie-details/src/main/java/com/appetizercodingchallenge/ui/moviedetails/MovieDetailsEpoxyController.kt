@@ -15,6 +15,7 @@ internal class MovieDetailsEpoxyController(private var context: Context?) : Epox
 
     interface Callbacks {
         fun onTrackClicked(trackId: Long)
+        fun onPreviewUrl(url: String)
     }
 
     override fun buildModels() {
@@ -23,9 +24,12 @@ internal class MovieDetailsEpoxyController(private var context: Context?) : Epox
             text("About")
         }
 
-        description {
+        movieDescription {
             id("description")
             text(state.movie.longDescription)
+            onViewPreviewClick { _ ->
+                callbacks?.onPreviewUrl(state.movie.previewUrl)
+            }
         }
 
         vertSpacerSmall {

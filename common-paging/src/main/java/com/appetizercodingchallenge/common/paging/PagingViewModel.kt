@@ -98,6 +98,7 @@ abstract class PagingViewModel<EVS : PagingViewState, LI, PI : PagingInteractor<
                     when (it) {
                         InvokeSuccess -> UiSuccess
                         InvokeStarted -> UiLoading(fullRefresh)
+                        is InvokeError -> UiError(it.throwable)
                         else -> UiIdle
                     }
                 }

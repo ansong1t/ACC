@@ -68,11 +68,12 @@ abstract class ItemDao : EntityDao<Song>() {
                 }
             }
             val entry = ItemEntry(
-                trackId = when (it.wrapperType) {
+                itemId = when (it.wrapperType) {
                     "track" -> when (responseToTrackType(it.kind)) {
                         ListItemType.TV_SHOW, ListItemType.AUDIOBOOK -> it.collectionId
                         else -> it.trackId
                     }
+                    "audiobook" -> it.collectionId
                     else -> it.trackId
                 },
                 kind = when (it.wrapperType) {

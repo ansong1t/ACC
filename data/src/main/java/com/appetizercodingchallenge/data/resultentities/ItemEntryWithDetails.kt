@@ -42,7 +42,7 @@ data class ItemEntryWithDetails(
 
     @Ignore
     fun generateStableId(): Long {
-        return Objects.hash(Song::class.java.name, FeatureMovie::class.java.name, itemEntry.trackId)
+        return Objects.hash(Song::class.java.name, FeatureMovie::class.java.name, itemEntry.itemId)
             .toLong()
     }
 

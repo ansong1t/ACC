@@ -20,8 +20,14 @@ fun SharedPreferences.recordPreviousVisited() =
 fun SharedPreferences.setLastUserVisitedTime() =
     edit().putLong(PREF_LAST_USER_VISITED, System.currentTimeMillis()).apply()
 
-fun SharedPreferences.getLastUserVisitedTime(): Date =
-    Date(getLong(PREF_LAST_USER_VISITED, System.currentTimeMillis()))
+fun SharedPreferences.getLastUserVisitedTime(): Date? =
+    if (contains(PREF_LAST_USER_VISITED)) Date(
+        getLong(
+            PREF_LAST_USER_VISITED,
+            System.currentTimeMillis()
+        )
+    )
+    else null
 
 fun SharedPreferences.isLoggedIn() =
     !(getString(PREF_LAST_USER_VISITED, null).isNullOrBlank())
