@@ -2,9 +2,6 @@
 import com.appetizercodingchallenge.Libs
 buildscript {
 
-    ext {
-        kotlin_version = '1.3.72'
-    }
     ext.buildConfig = [
             'compileSdk': 30,
             'minSdk'    : 21,
@@ -19,7 +16,6 @@ buildscript {
         classpath Libs.androidGradlePlugin
         classpath Libs.Kotlin.gradlePlugin
         classpath Libs.AndroidX.Navigation.safeArgs
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
 //        classpath Libs.Google.gmsGoogleServices
 //        classpath Libs.Google.crashlyticsGradle
         // NOTE: Do not place your application dependencies here; they belong
