@@ -2,7 +2,7 @@
 
 ## The Architechture ##
 * MVVM Pattern with Clean Architecture (includes Domain, Repository layer). MVVM separates your view (i.e. `Activity`s and `Fragment`s) from your business logic.
-![MVVM Android](https://paper.dropbox.com/ep/redirect/image?url=https%3A%2F%2Fpaper-attachments.dropbox.com%2Fs_1A49CF2CDECE18C3C45D4A8C294D3A6AB820A24086C8F58664C667EE1D3DEE15_1596363961850_ACCArch.png&hmac=wOsjhLaoH6IqBp%2FNSf6WIPKDz37j5MkBQriVBVcD4xQ%3D&width=1490)
+![MVVM Android](https://krify.co/wp-content/uploads/2019/06/MVVM-for-Android-App-Development.png)
 
 ### Tech Stack ###
 - [Kotlin](https://kotlinlang.org/) - app primary programming language
@@ -18,7 +18,7 @@
 - [Coil](https://github.com/coil-kt/coil) - image loading library
 - [Ktlint](https://github.com/pinterest/ktlint)/[Detekt](https://github.com/detekt/detekt) - code linting and code smells
 
-### App Features List###
+### App Features List ###
 - Modular app architecture
 - Offline mode
 - Installed precommit hook to scan code first
