@@ -1,6 +1,6 @@
 ## Appetizer Coding Challenge ##
 
-## The Architechture ##
+## The Architecture ##
 * MVVM Pattern with Clean Architecture (includes Domain, Repository layer). MVVM separates your view (i.e. `Activity`s and `Fragment`s) from your business logic.
 ![MVVM Android](https://krify.co/wp-content/uploads/2019/06/MVVM-for-Android-App-Development.png)
 
